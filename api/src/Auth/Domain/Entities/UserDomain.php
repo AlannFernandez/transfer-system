@@ -5,16 +5,16 @@ namespace Src\Auth\Domain\Entities;
 class UserDomain
 {
     public function __construct(
-        private ?int $id,
-        private string $name,
+        private ?int    $id,
+        private string  $name,
         private ?string $lastName,
-        private string $email,
-        private string $password,
-        private ?int $documentTypeId = null,
-        private ?string $documentNumber = null,
+        private string  $email,
+        private string  $password,
+        private ?int    $documentTypeId = null,
+        private ?string $document = null,
         private ?string $birthDate = null,
-        private ?int $nationalityId = null,
-        private ?int $genderId = null,
+        private ?int    $nationalityId = null,
+        private ?int    $genderId = null,
         private ?string $transactionPin = null
     ) {}
 
@@ -25,7 +25,7 @@ class UserDomain
     public function getEmail(): string { return $this->email; }
     public function getPassword(): string { return $this->password; }
     public function getDocumentTypeId(): ?int { return $this->documentTypeId; }
-    public function getDocumentNumber(): ?string { return $this->documentNumber; }
+    public function getDocument(): ?string { return $this->document; }
     public function getBirthDate(): ?string { return $this->birthDate; }
     public function getNationalityId(): ?int { return $this->nationalityId; }
     public function getGenderId(): ?int { return $this->genderId; }

@@ -3,6 +3,7 @@
 namespace Src\Auth\Infrastructure\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Src\Auth\Infrastructure\Http\Requests\RegisterUserRequest;
 use Src\Auth\Infrastructure\Http\Resources\RegisterUserResource;
 use Src\Auth\Application\DTOs\RegisterUserDto;
@@ -14,12 +15,12 @@ class RegisterController extends Controller
         private readonly RegisterUserUseCase $registerUserUseCase
     ) {}
 
-    public function __invoke(RegisterUserRequest $request): RegisterUserResource
+    public function __invoke(RegisterUserRequest $request): JsonResponse
     {
         $dto = RegisterUserDto::fromArray($request->validated());
 
         $result = $this->registerUserUseCase->execute($dto);
 
-        return new RegisterUserResource($result);
+        return response()->json((new RegisterUserResource())->toArray($result),201);
     }
 }

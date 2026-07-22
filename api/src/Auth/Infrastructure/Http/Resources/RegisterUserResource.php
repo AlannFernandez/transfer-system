@@ -2,32 +2,26 @@
 
 namespace Src\Auth\Infrastructure\Http\Resources;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 
-class RegisterUserResource extends JsonResource
+use Src\Auth\Domain\Entities\UserDomain;
+
+class RegisterUserResource
 {
     /**
      * Transform the resource into an array.
      *
      * @return array<string, mixed>
      */
-    public function toArray(Request $request): array
+    public function toArray(UserDomain $user): array
     {
         return [
             'user' => [
-                'id'              => $this['user']->id,
-                'name'            => $this['user']->name,
-                'last_name'       => $this['user']->lastName,
-                'email'           => $this['user']->email,
-                'document_number' => $this['user']->documentNumber,
-            ],
-            'wallet' => [
-                'id'       => $this['wallet']->id,
-                'currency' => $this['wallet']->currency,
-                'balance'  => $this['wallet']->balance,
-                'status'   => $this['wallet']->status->value,
-            ],
+                'id'              => $user->getId(),
+                'name'            => $user->getName(),
+                'last_name'       => $user->getLastName(),
+                'email'           => $user->getEmail(),
+                'document'        => $user->getDocument(),
+            ]
         ];
     }
 }

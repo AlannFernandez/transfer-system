@@ -11,9 +11,9 @@ use Src\Auth\Application\UseCases\LoginUserUseCase;
 use Src\Auth\Domain\Exceptions\InvalidCredentialsException;
 use Src\Auth\Infrastructure\Http\Requests\LoginRequest;
 
-class AuthController extends Controller
+class LoginController extends Controller
 {
-    public function login(LoginRequest $request, LoginUserUseCase $useCase): JsonResponse
+    public function __invoke(LoginRequest $request, LoginUserUseCase $useCase): JsonResponse
     {
         try {
             $dto = new LoginInputDto(

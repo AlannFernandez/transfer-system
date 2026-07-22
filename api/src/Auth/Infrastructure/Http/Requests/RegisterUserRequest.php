@@ -19,7 +19,7 @@ class RegisterUserRequest extends FormRequest
             'email'            => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password'         => ['required', 'string', 'min:8'],
             'document_type_id' => ['required', 'integer', 'exists:document_types,id'],
-            'document_number'  => ['required', 'string', 'max:50'],
+            'document'         => ['required', 'string', 'max:50'],
             'birth_date'       => ['required', 'date', 'before:today'],
             'nationality_id'   => ['required', 'integer', 'exists:countries,id'],
             'gender_id'        => ['required', 'integer', 'exists:genders,id'],
