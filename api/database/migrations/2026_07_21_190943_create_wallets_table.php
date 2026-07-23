@@ -14,13 +14,13 @@ return new class extends Migration
        Schema::create('wallets', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('currency', 3)->default('USD'); // USD, ARS, EUR, etc.
+            $table->foreignId('currency_id')->constrained('currencies');
             $table->decimal('balance', 15, 4)->default(0.0000);
             $table->enum('status', ['active', 'frozen', 'closed'])->default('active');
             $table->timestamps();
 
             // Garantiza que un usuario no tenga dos billeteras de la misma moneda
-            $table->unique(['user_id', 'currency']);
+            $table->unique(['user_id', 'currency_id']);
         });
     }
 
