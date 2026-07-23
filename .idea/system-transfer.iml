@@ -125,6 +125,8 @@
       <excludeFolder url="file://$MODULE_DIR$/api/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/api/storage/app" />
       <excludeFolder url="file://$MODULE_DIR$/api/storage/framework" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/lcobucci/jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/api/vendor/tymon/jwt-auth" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

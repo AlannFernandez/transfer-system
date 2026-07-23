@@ -5,6 +5,7 @@ namespace Src\Auth\Application\UseCases;
 use Src\Auth\Application\DTOs\RegisterUserDto;
 use Src\Auth\Domain\Entities\UserDomain;
 // use Src\Auth\Domain\Events\UserRegisteredEvent;
+use Src\Auth\Domain\Events\UserRegisteredEvent;
 use Src\Auth\Domain\Repositories\UserRepositoryInterface;
 
 
@@ -30,6 +31,10 @@ readonly class RegisterUserUseCase
             transactionPin: null
         );
 
-        return $this->userRepository->save($userDomain);
+        $userSaved = $this->userRepository->save($userDomain);
+
+        UserRegisteredEvent::dispatch($userSaved->getId());
+
+        return $userSaved;
     }
 }

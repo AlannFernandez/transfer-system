@@ -126,6 +126,8 @@
       <path value="$PROJECT_DIR$/api/vendor/monolog/monolog" />
       <path value="$PROJECT_DIR$/api/vendor/hamcrest/hamcrest-php" />
       <path value="$PROJECT_DIR$/api/vendor/nesbot/carbon" />
+      <path value="$PROJECT_DIR$/api/vendor/tymon/jwt-auth" />
+      <path value="$PROJECT_DIR$/api/vendor/lcobucci/jwt" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.3">

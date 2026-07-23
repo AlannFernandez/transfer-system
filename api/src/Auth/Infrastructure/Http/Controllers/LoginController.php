@@ -13,30 +13,29 @@ use Src\Auth\Infrastructure\Http\Requests\LoginRequest;
 
 class LoginController extends Controller
 {
-    public function __invoke(LoginRequest $request, LoginUserUseCase $useCase): JsonResponse
+    public function __construct(
+        private readonly LoginUserUseCase $loginUserUseCase
+    ) {}
+    public function __invoke(LoginRequest $request): JsonResponse
     {
         try {
-            $dto = new LoginInputDto(
-                email: $request->validated('email'),
-                password: $request->validated('password')
-            );
-
-            $userDomain = $useCase->execute($dto);
-
-            $eloquentUser = UserModel::find($userDomain->getId());
-            $token = $eloquentUser->createToken('auth_token')->plainTextToken;
+            $responseDto = ($this->loginUserUseCase)($request->getDTO());
 
             return response()->json([
-                'message' => 'Inicio de sesión exitoso',
-                'data'    => [
+                'status' => 'success',
+                'data'   => [
                     'user' => [
-                        'id'    => $userDomain->getId(),
-                        'name'  => $userDomain->getName(),
-                        'email' => $userDomain->getEmail(),
+                        'id'    => $responseDto->user->getId(),
+                        'name'  => $responseDto->user->getName(),
+                        'email' => $responseDto->user->getEmail(),
                     ],
-                    'token' => $token,
-                ],
-            ], Response::HTTP_OK);
+                    'authorization' => [
+                        'access_token' => $responseDto->accessToken,
+                        'token_type'   => $responseDto->tokenType,
+                        'expires_in'   => $responseDto->expiresIn,
+                    ]
+                ]
+            ]);
 
         } catch (InvalidCredentialsException $e) {
             return response()->json([
